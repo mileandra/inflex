@@ -136,6 +136,18 @@ defmodule InflexTest do
     assert "leaves" == pluralize("leaf")
   end
 
+  test :special_case_nouns_ending_in_erve_or_erves do
+    assert "reserve" == singularize("reserves")
+    assert "preserve" == singularize("preserves")
+    assert "nerve" == singularize("nerves")
+    assert "observe" == singularize("observes")
+
+    assert "reserves" == pluralize("reserve")
+    assert "preserves" = pluralize("preserve")
+    assert "nerves" == pluralize("nerve")
+    assert "observes" == pluralize("observe")
+  end
+
   test :special_case_nouns_ending_in_o do
     assert "echo" == singularize("echoes")
     assert "hero" == singularize("heroes")
@@ -169,14 +181,14 @@ defmodule InflexTest do
   end
 
   test :camelize_upper do
-    assert "Upper"          == camelize("upper")
+    assert "Upper" == camelize("upper")
     assert "UpperCamelCase" == camelize("upper_camel_case")
     assert "UpperCamelCase" == camelize("UpperCamelCase")
     refute "UpperCamelCase" == camelize("upper_camel_case", :lower)
   end
 
   test :camelize_lower do
-    assert "lower"          == camelize("lower", :lower)
+    assert "lower" == camelize("lower", :lower)
     assert "lowerCamelCase" == camelize("lower_camel_case", :lower)
     assert "lowerCamelCase" == camelize("Lower_camel_case", :lower)
     assert "lowerCamelCase" == camelize("lowerCamelCase", :lower)
@@ -242,5 +254,4 @@ defmodule InflexTest do
     assert "slice" == inflect("slice", 1)
     assert "accomplice" == inflect("accomplice", 1)
   end
-
 end
